@@ -1,0 +1,14 @@
+{
+  "name": "lessdumb",
+  "description": "One skill that makes your agent question requirements and delete parts before it simplifies, speeds up or automates anything.",
+  "version": "1.0.0",
+  "author": {
+    "name": "enkhbold470",
+    "url": "https://github.com/enkhbold470"
+  },
+  "homepage": "https://github.com/enkhbold470/lessdumb",
+  "repository": "https://github.com/enkhbold470/lessdumb",
+  "license": "MIT",
+  "keywords": ["skill", "requirements", "deletion", "simplification", "automation", "design-review"],
+  "skills": ["./skills/lessdumb"]
+}

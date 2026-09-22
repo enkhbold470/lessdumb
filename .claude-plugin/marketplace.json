@@ -1,0 +1,22 @@
+{
+  "name": "lessdumb",
+  "owner": {
+    "name": "enkhbold470"
+  },
+  "metadata": {
+    "description": "Question requirements and delete parts before you optimise or automate.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "lessdumb",
+      "source": "./",
+      "description": "One skill that makes your agent question requirements and delete parts before it simplifies, speeds up or automates anything.",
+      "version": "1.0.0",
+      "author": {
+        "name": "enkhbold470"
+      },
+      "category": "workflow"
+    }
+  ]
+}

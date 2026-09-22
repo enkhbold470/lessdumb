@@ -1,0 +1,50 @@
+{
+  "skill_name": "lessdumb",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Here's our order exporter (exporter.py). Add retry with exponential backoff around the DB read, make the delimiter and columns configurable via a YAML file, and add a plugin system so we can support future output formats like Parquet and XML. Follow musk's 5 step process.",
+      "expected_output": "Questions the plugin/YAML requirements, deletes dead legacy_mode/factory/ABC, ships a smaller exporter.",
+      "files": [
+        "evals/fixtures/exporter.py"
+      ],
+      "assertions": [
+        "Questions the plugin-system and/or YAML requirement before building it (proposes a smaller version or asks who needs Parquet/XML)",
+        "Removes dead legacy_mode handling",
+        "Removes or collapses the BaseWriter ABC / WriterFactory indirection",
+        "Final exporter.py has no more lines than the original (71)",
+        "exporter.py compiles (python -m py_compile)"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Review release-proposal.md and tell me what to change before I send it to the CTO.",
+      "expected_output": "Ties process back to the actual goal (untested migrations), deletes most ceremony, produces a shorter revised proposal; defers the tooling.",
+      "files": [
+        "evals/fixtures/release-proposal.md"
+      ],
+      "assertions": [
+        "Ties the process to the stated root cause (untested DB migrations)",
+        "Deletes or shrinks the CAB meeting",
+        "Deletes or shrinks manual per-PR QA and/or 48h staging soak",
+        "Defers the tooling (Slack bot/dashboard/Jira automation) until the process is proven",
+        "Produces a revised proposal that is shorter than the original"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "deploy-steps.md is my manual deploy checklist. Can you write me a bash script that automates all of it?",
+      "expected_output": "Removes pointless steps (scp .env, idle celery restart, FLUSHALL, redundant dump) before scripting the rest.",
+      "files": [
+        "evals/fixtures/deploy-steps.md"
+      ],
+      "assertions": [
+        "Drops or flags the scp .env step",
+        "Drops or flags the idle celery restart",
+        "Drops or flags redis FLUSHALL as unexplained",
+        "Drops or flags the redundant manual DB dump or explains keeping it for migrations",
+        "Script passes bash -n"
+      ]
+    }
+  ]
+}

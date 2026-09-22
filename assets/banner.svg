@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="420" viewBox="0 0 1280 420" role="img" aria-label="lessdumb: five stages, flown in order">
+  <rect width="1280" height="420" fill="#000"/>
+  <g fill="#fff" opacity="0.55">
+    <circle cx="90" cy="60" r="1.2"/><circle cx="260" cy="120" r="0.9"/><circle cx="410" cy="40" r="1.1"/>
+    <circle cx="700" cy="70" r="0.8"/><circle cx="880" cy="30" r="1.2"/><circle cx="1030" cy="100" r="0.9"/>
+    <circle cx="1190" cy="50" r="1.1"/><circle cx="1120" cy="170" r="0.8"/><circle cx="560" cy="150" r="0.9"/>
+  </g>
+  <path d="M 120 360 Q 640 -40 1160 250" fill="none" stroke="#fff" stroke-opacity="0.35" stroke-width="1.5" stroke-dasharray="2 6"/>
+  <g font-family="Helvetica Neue, Helvetica, Arial, sans-serif" fill="#fff">
+    <text x="640" y="232" text-anchor="middle" font-size="96" font-weight="300" letter-spacing="28">LESSDUMB</text>
+    <text x="640" y="282" text-anchor="middle" font-size="16" letter-spacing="7" fill-opacity="0.7">FIVE STAGES · FLOWN IN ORDER</text>
+    <g font-size="13" letter-spacing="3" fill-opacity="0.85" text-anchor="middle">
+      <text x="200" y="380">01 REQUIREMENTS</text>
+      <text x="420" y="380">02 DELETE</text>
+      <text x="640" y="380">03 SIMPLIFY</text>
+      <text x="860" y="380">04 ACCELERATE</text>
+      <text x="1080" y="380">05 AUTOMATE</text>
+    </g>
+  </g>
+  <g stroke="#fff" stroke-opacity="0.35">
+    <line x1="200" y1="352" x2="200" y2="362"/><line x1="420" y1="352" x2="420" y2="362"/>
+    <line x1="640" y1="352" x2="640" y2="362"/><line x1="860" y1="352" x2="860" y2="362"/>
+    <line x1="1080" y1="352" x2="1080" y2="362"/><line x1="140" y1="357" x2="1140" y2="357"/>
+  </g>
+</svg>

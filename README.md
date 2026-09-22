@@ -1,76 +1,95 @@
-# lessdumb
+<p align="center">
+  <img src="assets/banner.svg" alt="LESSDUMB: five stages, flown in order" width="100%">
+</p>
 
-An agent skill that makes Claude (or any agent that reads `SKILL.md`) question
-requirements and delete parts before it simplifies, speeds up or automates
-anything.
+<p align="center">
+  <b>An agent skill that questions requirements and deletes parts<br>before it optimises or automates anything.</b>
+</p>
 
-It runs the 5-step design process Elon Musk described on the 2021 Starbase
-tour with Tim Dodd (Everyday Astronaut), in order:
+<p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-000000?style=flat-square" alt="MIT license"></a>
+  <img src="https://img.shields.io/badge/Claude%20Code-plugin-000000?style=flat-square" alt="Claude Code plugin">
+  <img src="https://img.shields.io/badge/SKILL.md-1%20file-000000?style=flat-square" alt="one SKILL.md">
+</p>
 
-1. **Make the requirements less dumb.** Every requirement gets a person as its
-   owner, including the ones that came from someone smart.
-2. **Delete the part or process.** If you aren't adding back about 10% of what
-   you cut, you didn't cut enough.
-3. **Simplify or optimise** what survived, looking at the whole system first.
-4. **Accelerate cycle time** at the bottleneck.
-5. **Automate**, last, and only what has been done by hand long enough to show
-   its edge cases.
+---
 
-Agents tend to start at step 5. In our test, asked to script a 13-step manual
-deploy, Claude without the skill scripted all 13, and kept the idle celery
-restart and a `redis-cli FLUSHALL` nobody could explain as opt-in flags. With
-the skill it deleted both before writing the script.
+## Mission
 
-## What it does
+Agents launch at stage 5. Ask one to script a 13-step manual deploy and it
+scripts all 13. In our test, Claude without this skill kept an idle celery
+restart and a `redis-cli FLUSHALL` nobody could explain, as opt-in flags. With
+the skill loaded, it deleted both before it wrote a line of bash.
 
-The skill writes a short review under the five steps, then acts on the smaller
-plan that survives: it builds the reduced feature, deletes the dead parts as
-their own change, or hands back the shorter version of your proposal. It
-stops only for questions that block, and for deletions that touch money,
-security, user data or destructive operations.
+lessdumb flies the 5-step design process Elon Musk described on the 2021
+Starbase tour with Tim Dodd (Everyday Astronaut). The stages run in order,
+because each one stops you spending effort on the next.
 
-It starts on its own when you ask to design, simplify, refactor, automate or
-review a plan, and when you type `/lessdumb`.
+## Flight profile
 
-## Install
+| Stage | | Burn |
+|:-:|---|---|
+| **01** | **Requirements** | Make them less dumb. Every requirement gets a person as its owner, including the ones from someone smart. |
+| **02** | **Delete** | Cut the part or process. If you aren't adding back ~10% of what you cut, you didn't cut enough. |
+| **03** | **Simplify** | Optimise only what survived, after looking at the whole vehicle. |
+| **04** | **Accelerate** | Shorten the loop at the bottleneck, not where it's easy. |
+| **05** | **Automate** | Last, and only what has been flown by hand long enough to show its edge cases. |
 
-**Claude Code, as a plugin:**
+> "Possibly the most common error of a smart engineer is to optimise a thing
+> that should not exist."
+
+## What happens on a run
+
+The skill writes a short review under the five stages, then acts on the
+smaller plan that survives. It builds the reduced feature, deletes dead parts
+as their own change, or hands back the shorter version of your proposal. Every
+review ends with a **net** line (13 steps → 8, 71 lines → 58), because the
+review has to obey stage 02 too.
+
+It holds for two things only: questions it can't answer without you, and
+deletions that touch money, security, user data or a destructive operation.
+
+It fires on its own when you ask to design, simplify, refactor, automate or
+review a plan, and on `/lessdumb`.
+
+## Pre-flight
+
+**Claude Code plugin**
 
 ```
 /plugin marketplace add enkhbold470/lessdumb
 /plugin install lessdumb@lessdumb
 ```
 
-**Claude Code, by hand:**
+**Claude Code, by hand**
 
 ```sh
 git clone https://github.com/enkhbold470/lessdumb
 cp -r lessdumb/skills/lessdumb ~/.claude/skills/
 ```
 
-**Other agents:** copy `skills/lessdumb/SKILL.md` wherever your agent loads
-skills or rules from. It is plain Markdown with YAML frontmatter.
+**Any other agent:** copy `skills/lessdumb/SKILL.md` to wherever your agent
+loads skills or rules. It is plain Markdown with YAML frontmatter.
 
-## Try it
+## Test stand
 
 Three test prompts live in [`evals/`](evals/), with their input files:
 
-- `exporter.py`: a small CSV exporter, plus a request for retries, YAML config
-  and a plugin system.
-- `release-proposal.md`: a weekly release process with a change board and a
-  code freeze, aimed at incidents that came from untested migrations.
-- `deploy-steps.md`: a 13-step manual deploy the user wants scripted.
+| Fixture | The request |
+|---|---|
+| `exporter.py` | A small CSV exporter, plus asks for retries, YAML config and a plugin system. |
+| `release-proposal.md` | A weekly release train with a code freeze and change board, aimed at incidents caused by untested migrations. |
+| `deploy-steps.md` | A 13-step manual deploy to be scripted. |
 
-Run each prompt with and without the skill and compare what gets built.
+Run each with and without the skill and compare what gets built.
 `evals/evals.json` lists the checks.
 
-## Why one skill
+## Why one skill, not six
 
 [wezendy/elon-musk-algorithm-skills](https://github.com/wezendy/elon-musk-algorithm-skills)
-covers the same algorithm as six skills, with a gate before each step and a
-form to fill in for each. lessdumb keeps it to one skill for two reasons. Six
-overlapping triggers ("optimize this", "refactor", "script this") load gated
-steps into everyday requests. And the review has to obey step 2 itself: a
+flies the same algorithm as six skills, each with a gate and a form to fill
+in. lessdumb keeps it to one file. Six overlapping triggers ("optimize this",
+"refactor", "script this") load gated steps into everyday requests, and a
 review longer than the thing it reviews has added parts. Several ideas here
 came from that repo: moving a guarantee before deleting the code that held it,
 the 25% ceiling on add-backs, targeting the bottleneck, and planning how to
@@ -79,7 +98,7 @@ undo an automation.
 ## Contributing
 
 Issues and pull requests are welcome. If you change `SKILL.md`, run the three
-evals before and after and say in the PR what changed in the output.
+evals before and after, and say in the PR what changed in the output.
 
 ## License
 
